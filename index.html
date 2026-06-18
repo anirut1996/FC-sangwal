@@ -1,366 +1,270 @@
-       
-
-
-   
-
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Fc sangwal—7-Eleven </title>
-  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --red:    #e31837;
-      --green:  #007b40;
-      --orange: #f47920;
-      --yellow: #ffd700;
-      --stripe: #ffd700;
-      --white:  #ffffff;
-      --light:  #f2f2ed;
-      --dark:   #1c1c1c;
-      --muted:  #888;
-    }
-    body {
-      min-height: 100vh;
-      background: var(--light);
-      font-family: 'Sarabun', sans-serif;
-      position: relative;
-    }
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background: repeating-linear-gradient(-45deg,transparent,transparent 36px,rgba(227,24,55,0.03) 36px,rgba(227,24,55,0.03) 38px);
-      pointer-events: none; z-index: 0;
-    }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>FC สังวาล — 7-Eleven</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#e31837;--green:#007b40;--orange:#f47920;--yellow:#ffd700;
+  --dark:#1a1a1a;--surface:#ffffff;--bg:#f4f4f0;--muted:#888;
+  --card-radius:16px;--ease:cubic-bezier(.4,0,.2,1);
+}
+body{font-family:'Sarabun',sans-serif;background:var(--bg);min-height:100vh;color:var(--dark)}
 
-    header {
-      position: sticky; top: 0; z-index: 100;
-      background: var(--red);
-      box-shadow: 0 4px 20px rgba(227,24,55,0.4);
-    }
-    .stripe {
-      height: 6px;
-      background: linear-gradient(90deg, var(--green) 33%, var(--yellow) 33% 66%, var(--orange) 66%);
-    }
-    .header-inner {
-      max-width: 960px; margin: 0 auto;
-      padding: 10px 20px;
-      display: flex; align-items: center; gap: 14px;
-    }
-    .logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 40px; line-height: 1;
-      color: #fff;
-      letter-spacing: -1px;
-      text-shadow: 2px 2px 0 rgba(0,0,0,0.25);
-    }
-    .logo span { color: var(--yellow); }
-    .vline { width: 2px; height: 38px; background: rgba(255,255,255,0.25); border-radius: 2px; }
-    .site-name { color: #fff; }
-    .site-name .en { font-size: 16px; font-weight: 700; letter-spacing: 0.04em; }
-    .site-name .th { font-size: 11px; opacity: 0.75; letter-spacing: 0.08em; text-transform: uppercase; }
-    .ml-auto { margin-left: auto; }
-    .badge {
-      background: var(--green); color: #fff;
-      font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
-      padding: 4px 12px; border-radius: 20px;
-    }
+/* ── HEADER ── */
+header{position:sticky;top:0;z-index:100;background:var(--red)}
+.stripe{height:5px;background:linear-gradient(90deg,var(--green) 33%,var(--yellow) 33% 66%,var(--orange) 66%)}
+.header-inner{max-width:980px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:38px;line-height:1;color:#fff;letter-spacing:-1px}
+.logo span{color:var(--yellow)}
+.vline{width:1px;height:36px;background:rgba(255,255,255,0.2)}
+.site-name .en{font-size:15px;font-weight:700;color:#fff}
+.site-name .th{font-size:10px;opacity:.65;color:#fff;letter-spacing:.1em;text-transform:uppercase}
+.ml-auto{margin-left:auto;display:flex;align-items:center;gap:10px}
 
-    .hero {
-      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-      padding: 28px 20px;
-      text-align: center;
-      position: relative; overflow: hidden; z-index: 1;
-    }
-    .hero::before {
-      content: '7';
-      position: absolute; top: -20px; right: 20px;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 200px; color: rgba(255,255,255,0.03); line-height: 1;
-      pointer-events: none;
-    }
-    .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: #fff; letter-spacing: 0.12em; }
-    .hero p  { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 4px; letter-spacing: 0.05em; }
-    .hero-dots { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
-    .hero-dot { width: 28px; height: 4px; border-radius: 2px; }
-    .hero-dot:nth-child(1) { background: var(--red); }
-    .hero-dot:nth-child(2) { background: var(--green); }
-    .hero-dot:nth-child(3) { background: var(--orange); }
+/* ── CLOCK IN HEADER ── */
+.header-clock{display:flex;flex-direction:column;align-items:flex-end;gap:1px}
+.header-clock .hc-time{font-family:'Bebas Neue',sans-serif;font-size:26px;line-height:1;color:#fff;letter-spacing:3px}
+.header-clock .hc-time .colon{color:var(--yellow);animation:blink 1s step-start infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+.header-clock .hc-date{font-size:10px;color:rgba(255,255,255,.55);letter-spacing:.06em;white-space:nowrap}
 
-    .main-content { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; padding: 28px 16px 60px; }
+.live-badge{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:5px 12px}
+.pulse{width:8px;height:8px;border-radius:50%;background:#4ade80;animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.live-badge span{font-size:11px;font-weight:700;color:#fff;letter-spacing:.12em}
 
-    .sec-head {
-      display: flex; align-items: center; gap: 10px;
-      margin-bottom: 14px; margin-top: 28px;
-      animation: fadeUp 0.5s both;
-    }
-    .sec-head:first-child { margin-top: 0; }
-    .sec-line { flex: 1; height: 2px; background: linear-gradient(90deg, currentColor, transparent); border-radius: 2px; }
-    .sec-label {
-      font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase;
-      padding: 3px 12px; border-radius: 20px; white-space: nowrap;
-    }
-    .sec-label.red    { color: var(--red);    background: #fff0f2; }
-    .sec-label.red + .sec-line    { color: var(--red); }
-    .sec-label.green  { color: var(--green);  background: #e8f8f0; }
-    .sec-label.green + .sec-line  { color: var(--green); }
-    .sec-label.orange { color: var(--orange); background: #fff4ec; }
-    .sec-label.orange + .sec-line { color: var(--orange); }
-    .sec-label.dark   { color: #555;          background: #ebebeb; }
-    .sec-label.dark + .sec-line   { color: #ccc; }
+/* ── HERO ── */
+.hero{background:var(--dark);padding:20px 20px;text-align:center;position:relative;overflow:hidden}
+.hero-bg-num{position:absolute;top:-10px;right:10px;font-family:'Bebas Neue',sans-serif;font-size:180px;color:rgba(255,255,255,.03);line-height:1;pointer-events:none;user-select:none}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#fff;letter-spacing:.1em}
+.hero-sub{font-size:12px;color:rgba(255,255,255,.35);margin-top:5px;letter-spacing:.08em}
+.hero-dots{display:flex;justify-content:center;gap:8px;margin-top:12px}
+.hero-dot{width:32px;height:4px;border-radius:2px}
+.hero-dot:nth-child(1){background:var(--red)}
+.hero-dot:nth-child(2){background:var(--green)}
+.hero-dot:nth-child(3){background:var(--orange)}
 
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 12px; margin-bottom: 8px; }
+/* ── MAIN ── */
+.main{max-width:980px;margin:0 auto;padding:28px 16px 60px}
 
-    .card {
-      display: flex; align-items: center; gap: 14px;
-      background: #fff; border: 2px solid #eee; border-radius: 14px;
-      padding: 16px 18px; text-decoration: none; color: var(--dark);
-      position: relative; overflow: hidden;
-      transition: border-color .2s, transform .2s, box-shadow .2s;
-      animation: fadeUp .45s both;
-    }
-    .card::before {
-      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
-      background: var(--c, var(--red)); border-radius: 14px 0 0 14px;
-      transition: width .2s;
-    }
-    .card:hover { border-color: var(--c, var(--red)); transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.09); }
-    .card:hover::before { width: 6px; }
-    .card:active { transform: translateY(-1px) scale(0.99); }
-    .ci {
-      width: 46px; height: 46px; border-radius: 12px;
-      background: var(--ibg, #fff0f2);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 22px; flex-shrink: 0;
-      transition: transform .2s;
-    }
-    .card:hover .ci { transform: scale(1.1) rotate(-5deg); }
-    .cb { flex: 1; min-width: 0; }
-    .ct { font-size: 14px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; }
-    .cd { font-size: 11.5px; color: var(--muted); }
-    .arr { color: #ccc; font-size: 20px; flex-shrink: 0; transition: color .2s, transform .2s; }
-    .card:hover .arr { color: var(--c, var(--red)); transform: translateX(4px); }
+/* ── SECTION HEAD ── */
+.sec-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;margin-top:32px}
+.sec-head:first-child{margin-top:0}
+.sec-line{flex:1;height:1px;border-radius:1px}
+.sec-label{font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;padding:4px 14px;border-radius:20px;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.sl-red{color:var(--red);background:#fff0f2}.sl-red~.sec-line{background:linear-gradient(90deg,var(--red),transparent)}
+.sl-green{color:var(--green);background:#e8f8f0}.sl-green~.sec-line{background:linear-gradient(90deg,var(--green),transparent)}
+.sl-gray{color:#666;background:#ebebeb}.sl-gray~.sec-line{background:linear-gradient(90deg,#ccc,transparent)}
 
-    .c-red    { --c: #e31837; --ibg: #fff0f2; }
-    .c-green  { --c: #007b40; --ibg: #e8f8f0; }
-    .c-orange { --c: #f47920; --ibg: #fff4ec; }
-    .c-blue   { --c: #2563eb; --ibg: #eff6ff; }
-    .c-purple { --c: #7c3aed; --ibg: #f5f3ff; }
-    .c-teal   { --c: #0d9488; --ibg: #f0fdfa; }
-    .c-yellow { --c: #d97706; --ibg: #fffbeb; }
-    .c-pink   { --c: #db2777; --ibg: #fdf2f8; }
+/* ── GRID ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px;margin-bottom:6px}
 
-    footer {
-      position: relative; z-index: 1;
-      background: #1c1c1c; color: rgba(255,255,255,0.45);
-      text-align: center; padding: 18px; font-size: 12px; letter-spacing: 0.05em;
-    }
-    footer strong { color: var(--red); }
+/* ── CARD ── */
+.card{
+  display:flex;align-items:center;gap:14px;
+  background:var(--surface);border:1.5px solid #eee;border-radius:var(--card-radius);
+  padding:15px 16px;text-decoration:none;color:var(--dark);
+  position:relative;overflow:hidden;
+  transition:border-color .2s var(--ease),transform .2s var(--ease),box-shadow .2s var(--ease);
+}
+.card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--c,var(--red));border-radius:16px 0 0 16px;transition:width .2s var(--ease)}
+.card:hover{border-color:var(--c,var(--red));transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.card:hover::after{width:6px}
+.card:active{transform:translateY(-1px) scale(.99)}
+.ci{width:44px;height:44px;border-radius:12px;background:var(--ibg,#fff0f2);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;transition:transform .2s var(--ease)}
+.card:hover .ci{transform:scale(1.1) rotate(-6deg)}
+.cb{flex:1;min-width:0}
+.ct{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
+.cd{font-size:11.5px;color:var(--muted)}
+.arr{color:#ddd;font-size:18px;flex-shrink:0;transition:color .2s,transform .2s var(--ease)}
+.card:hover .arr{color:var(--c,var(--red));transform:translateX(4px)}
 
-    @keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
-    .card:nth-child(1){animation-delay:.04s} .card:nth-child(2){animation-delay:.08s}
-    .card:nth-child(3){animation-delay:.12s} .card:nth-child(4){animation-delay:.16s}
-    .card:nth-child(5){animation-delay:.20s} .card:nth-child(6){animation-delay:.24s}
-    .card:nth-child(7){animation-delay:.28s} .card:nth-child(8){animation-delay:.32s}
+.c-red{--c:#e31837;--ibg:#fff0f2}
+.c-green{--c:#007b40;--ibg:#e8f8f0}
+.c-blue{--c:#2563eb;--ibg:#eff6ff}
+.c-teal{--c:#0d9488;--ibg:#f0fdfa}
+.c-yellow{--c:#d97706;--ibg:#fffbeb}
 
-    @media(max-width:480px){
-      .grid{grid-template-columns:1fr;}
-      .badge,.vline{display:none;}
-      .logo{font-size:32px;}
-    }
-  </style>
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.card{animation:fadeUp .4s both}
+.card:nth-child(1){animation-delay:.05s}.card:nth-child(2){animation-delay:.1s}
+.card:nth-child(3){animation-delay:.15s}.card:nth-child(4){animation-delay:.2s}
+.card:nth-child(5){animation-delay:.25s}.card:nth-child(6){animation-delay:.3s}
+
+footer{background:#1a1a1a;color:rgba(255,255,255,.4);text-align:center;padding:18px;font-size:12px;letter-spacing:.06em}
+footer strong{color:var(--red)}
+
+@media(max-width:480px){
+  .grid{grid-template-columns:1fr}
+  .vline,.live-badge{display:none}
+  .logo{font-size:30px}
+  .hc-date{display:none}
+  .hc-time{font-size:20px!important}
+}
+</style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="header-inner">
-      <div class="logo">7<span>-</span>ELEVEn</div>
-      <div class="vline"></div>
-      <div class="site-name">
-        <div class="en">FC สังวาล พวงพี่</div>
-        <div class="th">ระบบจัดการภายในร้าน</div>
+<header>
+  <div class="header-inner">
+    <div class="logo">7<span>-</span>ELEVEn</div>
+    <div class="vline"></div>
+    <div class="site-name">
+      <div class="en">FC สังวาล พวงพี่</div>
+      <div class="th">ระบบจัดการภายในร้าน</div>
+    </div>
+    <div class="ml-auto">
+      <div class="live-badge">
+        <div class="pulse"></div>
+        <span>กำลังใช้งาน</span>
       </div>
-      <div class="ml-auto"><div class="badge">🟢กำลังใช้งาน</div></div>
-    </div>
-    <div class="stripe"></div>
-  </header>
-
-  <!-- HERO -->
-  <div class="hero">
-    <h1>🏪 7-Eleven ยินดีต้อนรับ</h1>
-    <p>ระบบจัดการข้อมูลภายในร้าน 7-Eleven FC สังวาล พวงพี่ ห้ามเผยแพร่ข้อมูลแก่บุคคลภายนอกเด็ดขาด 🔐</p>
-    <div class="hero-dots">
-      <div class="hero-dot"></div>
-      <div class="hero-dot"></div>
-      <div class="hero-dot"></div>
+      <div class="header-clock">
+        <div class="hc-time" id="clk-time">00<span class="colon">:</span>00<span class="colon">:</span>00</div>
+        <div class="hc-date" id="clk-date">กำลังโหลด...</div>
+      </div>
     </div>
   </div>
+  <div class="stripe"></div>
+</header>
 
-  <!-- MAIN CONTENT -->
-  <div class="main-content">
-    <!-- ── ส่วนที่ 1: งานขายและลูกค้า ── -->
-    <div class="sec-head">
-      <span class="sec-label red">💰 งานขาย &amp; ลูกค้า</span>
-      <div class="sec-line"></div>
-    </div>
-    <div class="grid">
-      <a href="https://docs.google.com/spreadsheets/d/1MfQySbV9yNH8rxgfrdOFFJanHTGn7WD5rZxygR6zA20/edit?gid=0#gid=0"
-         target="_blank" class="card c-red">
-        <div class="ci">📝</div>
-        <div class="cb">
-          <div class="ct">คีย์ยอดขายส่ง FC</div>
-          <div class="cd">หัวหน้าผลัดดึก คีย์ยอดขายทุกวัน</div>
-        </div>
-        <div class="arr">›</div>
-      </a>
-       <a href="https://docs.google.com/forms/d/e/1FAIpQLSfM0Sb5MSAp-uBfu-LZlzX1zG0n7poKwEnJmR17m3GZqBK6Rg/viewform"
-         target="_blank" class="card c-green">
-        <div class="ci">🗂️</div>
-        <div class="cb">
-          <div class="ct">คีย์ยอดขายสำหรับ ผจก.</div>
-          <div class="cd">ส่งยอดไม่เกิน 09:00น.</div>
-        </div>
-        <div class="arr">›</div>
-      </a>
-   
-    </div>
+<div class="hero">
+  <div class="hero-bg-num">7</div>
+  <h1>🏪 7-Eleven ยินดีต้อนรับ</h1>
+  <div class="hero-sub">🔐 ระบบจัดการข้อมูลภายในร้าน &nbsp;·&nbsp; ห้ามเผยแพร่ข้อมูลแก่บุคคลภายนอก</div>
+  <div class="hero-dots">
+    <div class="hero-dot"></div>
+    <div class="hero-dot"></div>
+    <div class="hero-dot"></div>
+  </div>
+</div>
 
-    <!-- ── ส่วนที่ 4: HR & พนักงาน ── -->
-    <div class="sec-head">
-      <span class="sec-label red">👥 HR &amp; พนักงาน</span>
-      <div class="sec-line"></div>
-    </div>
-    <div class="grid">
-      <a href="https://idphrconnect.cpall.co.th/logon/LogonPoint/tmindex.html"
-         target="_blank" class="card c-red">
-        <div class="ci">🏢</div>
-        <div class="cb">
-          <div class="ct">HR Connect</div>
-          <div class="cd">ระบบเชื่อมต่อฝ่าย HR</div>
-        </div>
-        <div class="arr">›</div>
-      </a>
-    
-      <a href="https://cpall.ekoapp.com/login"
-         target="_blank" class="card c-blue">
-        <div class="ci">🔗</div>
-        <div class="cb">
-          <div class="ct">CPALL Connect</div>
-          <div class="cd">ระบบเชื่อมต่อ CPALL</div>
-        </div>
-        <div class="arr">›</div>
-      </a>
+<div class="main">
 
-    </div>
-
-    <!-- ── ส่วนที่ 5: ความปลอดภัย & อื่นๆ ── -->
-    <div class="sec-head">
-      <span class="sec-label dark">🔐 ความปลอดภัย &amp; อื่นๆ</span>
-      <div class="sec-line"></div>
-    </div>
-    <div class="grid">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSc78MzikWneeM-jxVNA7IvD13tosQYFslQ2XHMMQw4YZQcxdA/viewform"
-         target="_blank" class="card c-blue">
-        <div class="ci">🔍</div>
-        <div class="cb">
-          <div class="ct">ค้นตัว—เข้า-ออกร้าน</div>
-          <div class="cd">บันทึกค้นตัว ฝากแบงค์</div>
-        </div>
-        <div class="arr">›</div>
-      </a>
-      <a href="https://docs.google.com/spreadsheets/d/1SjZC_sWcOjZpfQ2KitkpC6QInZ-F1nReAlP6OFKLpNI/edit?gid=1271066610#gid=1271066610"
-         target="_blank" class="card c-teal">
-        <div class="ci">📋</div>
-        <div class="cb">
-          <div class="ct">ตรวจสอบการค้นตัว</div>
-          <div class="cd">ดูประวัติการค้นตัวออกร้าน</div>
-        </div>
-        <div class="arr">›</div>
-      </a>
-      <a href="https://docs.google.com/spreadsheets/d/1nh3JJ2BALuOhsN19eJ09U2GT8KppwNF6OfEdIlTW0mE/edit?resourcekey=&gid=527036244#gid=527036244"
-         target="_blank" class="card c-teal">
-        <div class="ci">🗒</div>
-        <div class="cb">
-          <div class="ct">ตรวจสอบการค้นตัว</div>
-          <div class="cd">ดูประวัติการค้นตัวกลับเข้าร้าน</div>
-        </div>
-        <div class="arr">›</div>
-      </a>
-
-    </div>
-
-    <!-- ── ส่วนที่ 6: สำหรับผู้จัดการ ── -->
-    <div class="sec-head">
-      <span class="sec-label green">👔 สำหรับFC/ผู้จัดการ</span>
-      <div class="sec-line"></div>
-    </div>
-    <div class="grid">
-  
-      <a href="https://script.google.com/macros/s/AKfycbzJG1nf_9s3A9SiR4ooeh3UgVZYi0jLhuJdHghhnj22T067sLqZT7NvI7pDQtncaV5n/exec"
-         target="_blank" class="card c-teal">
-        <div class="ci">📒</div>
-        <div class="cb">
-          <div class="ct">รวมลิงค์ HR บุคคล</div>
-          <div class="cd">สำหรับ ผจก.</div>
-        </div>
-        <div class="arr">›</div>
-      </a>
-<a href="https://docs.google.com/forms/d/e/1FAIpQLSdgRwVZM6y78YKcr7MELa4dfHyqqKhk8ZrcouE1Zvd7GCqEcQ/viewform"
-         target="_blank" class="card c-yellow">
-        <div class="ci">☀️</div>
-        <div class="cb">
-          <div class="ct">จดมิเตอร์โซล่าเซลล์</div>
-          <div class="cd">บันทึกค่าไฟโซล่าเซลล์รายวัน</div>
-        </div>
-        <div class="arr">›</div>
-      </a>
-           <a href="https://drive.google.com/drive/u/0/folders/1NllqvqYf5HCoJuz8iU-4BFbVbzqIaORI"
-         target="_blank" class="card c-teal">
-        <div class="ci">📚</div>
-        <div class="cb">
-          <div class="ct">ไฟล์เอกสาร ผจก.</div>
-          <div class="cd">รวมไฟล์เอกสาร</div>
-        </div>
-        <div class="arr">›</div>
-      </a>
-       <a href="https://mob-backoffice-web.cpall.co.th/sc/login"
-         target="_blank" class="card c-teal">
-        <div class="ci">🛵</div>
-        <div class="cb">
-          <div class="ct">ระบบ Delivery</div>
-          <div class="cd">สำหรับ FC 
-          /ผจก.</div>
-        </div>
-        <div class="arr">›</div>
-      </a>
-      <a href="https://docs.google.com/forms/d/1av-z5J0y_TkjdBQAD3iCKN6of3EgEWFrpDZFMDVJcwo/viewform?edit_requested=true"
-         target="_blank" class="card c-teal">
-        <div class="ci">💸</div>
-        <div class="cb">
-          <div class="ct">ส่งรายได้สาขา</div>
-          <div class="cd">ลิงค์ส่งรายได้สาขา ผจก.</div>
-        </div>
-        <div class="arr">›</div>
-      </a>
-          <a href="ผจก.อนิรุทธิ์ 0958904540"
-         target="_blank" class="card c-teal">
-        <div class="ci">📞</div>
-        <div class="cb">
-          <div class="ct">ติดต่อ-สอบถาม</div>
-          <div class="cd">ผจก.อนิรุทธิ์ 095-8904540</div>
-        </div>
-        <div class="arr">›</div>
-      </a>
-    </div>
+  <!-- งานขาย & ลูกค้า -->
+  <div class="sec-head">
+    <span class="sec-label sl-red"><i class="ti ti-cash" aria-hidden="true"></i> งานขาย &amp; ลูกค้า</span>
+    <div class="sec-line"></div>
+  </div>
+  <div class="grid">
+    <a href="https://docs.google.com/spreadsheets/d/1MfQySbV9yNH8rxgfrdOFFJanHTGn7WD5rZxygR6zA20/edit?gid=0#gid=0" target="_blank" class="card c-red">
+      <div class="ci">📝</div>
+      <div class="cb"><div class="ct">คีย์ยอดขายส่ง FC</div><div class="cd">หัวหน้าผลัดดึก คีย์ยอดขายทุกวัน</div></div>
+      <div class="arr"><i class="ti ti-chevron-right"></i></div>
+    </a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfM0Sb5MSAp-uBfu-LZlzX1zG0n7poKwEnJmR17m3GZqBK6Rg/viewform" target="_blank" class="card c-green">
+      <div class="ci">🗂️</div>
+      <div class="cb"><div class="ct">คีย์ยอดขายสำหรับ ผจก.</div><div class="cd">ส่งยอดไม่เกิน 09:00 น.</div></div>
+      <div class="arr"><i class="ti ti-chevron-right"></i></div>
+    </a>
   </div>
 
-  <footer>
-    <strong>7-Eleven</strong> FC สังวาล พวงพี่ &nbsp;·&nbsp; ระบบจัดการร้านสาขา &nbsp;·&nbsp; จัดทำโดย ผจก.อนิรุทธิ์ สอนศรี ติดปัญหาการใช้งานระบบ ติดต่อ 095-8904540
-  </footer>
+  <!-- HR & พนักงาน -->
+  <div class="sec-head">
+    <span class="sec-label sl-red"><i class="ti ti-users" aria-hidden="true"></i> HR &amp; พนักงาน</span>
+    <div class="sec-line"></div>
+  </div>
+  <div class="grid">
+    <a href="https://idphrconnect.cpall.co.th/logon/LogonPoint/tmindex.html" target="_blank" class="card c-red">
+      <div class="ci">🏢</div>
+      <div class="cb"><div class="ct">HR Connect</div><div class="cd">ระบบเชื่อมต่อฝ่าย HR</div></div>
+      <div class="arr"><i class="ti ti-chevron-right"></i></div>
+    </a>
+    <a href="https://cpall.ekoapp.com/login" target="_blank" class="card c-blue">
+      <div class="ci">🔗</div>
+      <div class="cb"><div class="ct">CPALL Connect</div><div class="cd">ระบบเชื่อมต่อ CPALL</div></div>
+      <div class="arr"><i class="ti ti-chevron-right"></i></div>
+    </a>
+  </div>
+
+  <!-- ความปลอดภัย -->
+  <div class="sec-head">
+    <span class="sec-label sl-gray"><i class="ti ti-shield-lock" aria-hidden="true"></i> ความปลอดภัย &amp; อื่นๆ</span>
+    <div class="sec-line"></div>
+  </div>
+  <div class="grid">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc78MzikWneeM-jxVNA7IvD13tosQYFslQ2XHMMQw4YZQcxdA/viewform" target="_blank" class="card c-blue">
+      <div class="ci">🔍</div>
+      <div class="cb"><div class="ct">ค้นตัว—เข้า-ออกร้าน</div><div class="cd">บันทึกค้นตัว ฝากแบงค์</div></div>
+      <div class="arr"><i class="ti ti-chevron-right"></i></div>
+    </a>
+    <a href="https://docs.google.com/spreadsheets/d/1SjZC_sWcOjZpfQ2KitkpC6QInZ-F1nReAlP6OFKLpNI/edit?gid=1271066610#gid=1271066610" target="_blank" class="card c-teal">
+      <div class="ci">📋</div>
+      <div class="cb"><div class="ct">ตรวจสอบการค้นตัว</div><div class="cd">ดูประวัติค้นตัวออกร้าน</div></div>
+      <div class="arr"><i class="ti ti-chevron-right"></i></div>
+    </a>
+    <a href="https://docs.google.com/spreadsheets/d/1nh3JJ2BALuOhsN19eJ09U2GT8KppwNF6OfEdIlTW0mE/edit?resourcekey=&gid=527036244#gid=527036244" target="_blank" class="card c-teal">
+      <div class="ci">🗒</div>
+      <div class="cb"><div class="ct">ตรวจสอบการค้นตัว</div><div class="cd">ดูประวัติค้นตัวกลับเข้าร้าน</div></div>
+      <div class="arr"><i class="ti ti-chevron-right"></i></div>
+    </a>
+  </div>
+
+  <!-- FC / ผู้จัดการ -->
+  <div class="sec-head">
+    <span class="sec-label sl-green"><i class="ti ti-briefcase" aria-hidden="true"></i> สำหรับ FC / ผู้จัดการ</span>
+    <div class="sec-line"></div>
+  </div>
+  <div class="grid">
+    <a href="https://script.google.com/macros/s/AKfycbzJG1nf_9s3A9SiR4ooeh3UgVZYi0jLhuJdHghhnj22T067sLqZT7NvI7pDQtncaV5n/exec" target="_blank" class="card c-teal">
+      <div class="ci">📒</div>
+      <div class="cb"><div class="ct">รวมลิงก์ HR บุคคล</div><div class="cd">สำหรับ ผจก.</div></div>
+      <div class="arr"><i class="ti ti-chevron-right"></i></div>
+    </a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdgRwVZM6y78YKcr7MELa4dfHyqqKhk8ZrcouE1Zvd7GCqEcQ/viewform" target="_blank" class="card c-yellow">
+      <div class="ci">☀️</div>
+      <div class="cb"><div class="ct">จดมิเตอร์โซล่าเซลล์</div><div class="cd">บันทึกค่าไฟโซล่าเซลล์รายวัน</div></div>
+      <div class="arr"><i class="ti ti-chevron-right"></i></div>
+    </a>
+    <a href="https://drive.google.com/drive/u/0/folders/1NllqvqYf5HCoJuz8iU-4BFbVbzqIaORI" target="_blank" class="card c-teal">
+      <div class="ci">📚</div>
+      <div class="cb"><div class="ct">ไฟล์เอกสาร ผจก.</div><div class="cd">รวมไฟล์เอกสาร</div></div>
+      <div class="arr"><i class="ti ti-chevron-right"></i></div>
+    </a>
+    <a href="https://mob-backoffice-web.cpall.co.th/sc/login" target="_blank" class="card c-teal">
+      <div class="ci">🛵</div>
+      <div class="cb"><div class="ct">ระบบ Delivery</div><div class="cd">สำหรับ FC / ผจก.</div></div>
+      <div class="arr"><i class="ti ti-chevron-right"></i></div>
+    </a>
+    <a href="https://docs.google.com/forms/d/1av-z5J0y_TkjdBQAD3iCKN6of3EgEWFrpDZFMDVJcwo/viewform?edit_requested=true" target="_blank" class="card c-teal">
+      <div class="ci">💸</div>
+      <div class="cb"><div class="ct">ส่งรายได้สาขา</div><div class="cd">ลิงก์ส่งรายได้สาขา ผจก.</div></div>
+      <div class="arr"><i class="ti ti-chevron-right"></i></div>
+    </a>
+    <a href="tel:0958904540" class="card c-teal">
+      <div class="ci">📞</div>
+      <div class="cb"><div class="ct">ติดต่อ-สอบถาม</div><div class="cd">ผจก.อนิรุทธิ์ 095-890-4540</div></div>
+      <div class="arr"><i class="ti ti-chevron-right"></i></div>
+    </a>
+  </div>
+
+</div>
+
+<footer>
+  <strong>7-Eleven</strong> FC สังวาล พวงพี่ &nbsp;·&nbsp; ระบบจัดการร้านสาขา &nbsp;·&nbsp; จัดทำโดย ผจก.อนิรุทธิ์ สอนศรี &nbsp;·&nbsp; ติดปัญหาการใช้งาน ติดต่อ 095-890-4540
+</footer>
+
+<script>
+const DAYS_TH = ['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
+const MONTHS_TH = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+function pad(n){ return String(n).padStart(2,'0'); }
+function tick(){
+  const now = new Date();
+  const h = pad(now.getHours()), m = pad(now.getMinutes()), s = pad(now.getSeconds());
+  document.getElementById('clk-time').innerHTML = `${h}<span class="colon">:</span>${m}<span class="colon">:</span>${s}`;
+  const day = DAYS_TH[now.getDay()];
+  const date = now.getDate();
+  const month = MONTHS_TH[now.getMonth()];
+  const year = now.getFullYear() + 543;
+  document.getElementById('clk-date').textContent = `วัน${day} ${date} ${month} ${year}`;
+}
+tick();
+setInterval(tick, 1000);
+</script>
 
 </body>
 </html>
